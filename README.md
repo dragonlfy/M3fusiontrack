@@ -8,7 +8,7 @@ decomposes each modality into multiple frequency bands, and fuses them
 through a shared foundation backbone with uncertainty-aware gating.
 
 <p align="center">
-  <img src="assets/architecture.png" width="780" alt="M3FusionTrack architecture">
+  <img src="m.png" width="780" alt="M3FusionTrack architecture">
 </p>
 
 This repo is the **teaching / reproduction version** of the model: it is
