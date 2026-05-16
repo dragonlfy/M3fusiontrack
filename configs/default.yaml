@@ -1,0 +1,46 @@
+# Default configuration for M3FusionTrack.
+#
+# To start a new experiment, copy this file and edit the data.root paths
+# and any model / training hyper-parameters you want to override.
+
+model:
+  modalities:        [rgb, tir, event, depth]
+  num_bands:         3
+  img_size:          128
+  # backbone_name: "simple" -> tiny ViT (good for CPU and unit tests)
+  #                "dinov2_vitb14" -> use DINOv2-B/14 weights via torch.hub
+  backbone_name:     simple
+  lora_rank:         8
+  cmfa_layers:       2
+  cmfa_heads:        8
+  gate_temperature:  1.0
+
+loss:
+  cls_weight:           1.0
+  giou_weight:          2.0
+  l1_weight:            5.0
+  ortho_weight:         1.0e-3
+  consistency_weight:   1.0e-2
+
+data:
+  train:
+    root:        ./data/lasher          # any benchmark in the layout below
+    split:       train
+    modalities:  [rgb, tir]
+    img_size:    128
+    max_gap:     100
+  test:
+    root:        ./data/lasher
+    split:       test
+    modalities:  [rgb, tir]
+    img_size:    128
+
+train:
+  batch_size:    8
+  num_workers:   4
+  lr:            1.0e-4
+  weight_decay:  1.0e-4
+  epochs:        50
+  cosine_t_max:  50000
+  modality_dropout_max: 0.3
+  log_every:     50
